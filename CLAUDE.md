@@ -98,7 +98,7 @@ src/
 1. `<Navbar />` — fija
 2. `<Hero />` — 100vh, fondo --dark
 3. `<Servicios />` — 100vh, fondo --dark2, id="servicios"
-4. `<DetalleServicio />` × 3 — 100vh c/u, alternando claro/oscuro
+4. `<DetalleServicio />` × 3 — 100vh c/u (Firewall dark · Monitorización light · Auditorías dark)
 5. `<Nosotros />` — ~60vh, fondo --light2, id="nosotros"
 6. `<Contacto />` — 100vh, fondo --dark, id="contacto"
 7. `<Footer />` — fondo --dark, borde superior
@@ -127,10 +127,10 @@ El botón "Consultar más info →" de cada card:
 - Consultoría IT
 
 ### DetalleServicio (sección split)
-Props: `lado` ('izquierda'|'derecha'), `label`, `titulo`, `descripcion`, `visual`, `fondo` ('claro'|'oscuro')
-- Firewall → lado izquierda, fondo claro, visual = SVG escudo
-- Monitorización → lado derecha, fondo oscuro, visual = anillos de pulso animados CSS
-- Auditorías → lado izquierda, fondo claro, visual = panel de estado (OK/Revisar/Crítico)
+Props: `id`, `dataTheme` ('dark'|'light'), `lado` ('izquierda'|'derecha'), `label`, `titulo`, `descripcion`, `servicioId`, `visual` (JSX)
+- Firewall → lado izquierda, fondo oscuro (dark), visual = SVG escudo con checkmark azul
+- Monitorización → lado derecha, fondo claro (light), visual = anillos de pulso animados CSS
+- Auditorías → lado izquierda, fondo oscuro (dark), visual = panel de estado (OK/Revisar/Crítico)
 - Consultoría IT no tiene sección split propia → su CTA va directo a #contacto
 
 ### Nosotros

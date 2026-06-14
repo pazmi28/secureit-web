@@ -1,0 +1,108 @@
+/* ============================================================
+   Servicios — grid 2×2 de cards. Fondo oscuro --dark2.
+   ============================================================ */
+
+.servicios {
+  min-height: 100vh;
+  background: var(--dark2);
+  display: flex;
+  align-items: center;
+  padding: 100px 0;
+}
+
+/* ---------- Cabecera de sección ---------- */
+.servicios-eyebrow {
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--blue);
+  margin-bottom: 14px;
+}
+
+.servicios-titulo {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  letter-spacing: -0.02em;
+  color: var(--text-dark);
+  margin-bottom: 18px;
+  max-width: 680px;
+}
+
+.servicios-subtitulo {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: var(--text-muted);
+  max-width: 600px;
+  margin-bottom: 56px;
+}
+
+/* ---------- Grid 2×2 ---------- */
+.servicios-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* ---------- Card ---------- */
+.servicio-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 36px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  /* Hover sutil: borde azul + fondo algo más claro + leve elevación. */
+  transition: border-color 0.25s ease, background 0.25s ease,
+              transform 0.25s ease;
+}
+
+.servicio-card:hover {
+  border-color: var(--blue);
+  background: rgba(26, 140, 255, 0.04);
+  transform: translateY(-4px);
+}
+
+.servicio-card__icono {
+  font-size: 2.2rem;
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+.servicio-card__nombre {
+  font-size: 1.35rem;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+}
+
+.servicio-card__desc {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  flex-grow: 1; /* empuja el botón al fondo para alinear cards de distinto alto */
+}
+
+.servicio-card__btn {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--blue);
+  padding: 0;
+  transition: color 0.2s ease, gap 0.2s ease;
+}
+
+.servicio-card__btn:hover {
+  color: var(--blue-dark);
+}
+
+/* ---------- Responsive: 1 columna en mobile ---------- */
+@media (max-width: 768px) {
+  .servicios {
+    padding: 80px 0;
+  }
+
+  .servicios-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .servicio-card {
+    padding: 28px;
+  }
+}

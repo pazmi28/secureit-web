@@ -1,38 +1,132 @@
-.App {
-  text-align: center;
+/* ============================================================
+   App.css — Variables CSS globales + reset
+   Único CSS global del proyecto. El resto vive en cada componente.
+   ============================================================ */
+
+/* ---------- Paleta y tokens globales ---------- */
+:root {
+  /* Fondos */
+  --dark:       #0a0a0f;   /* fondo hero y secciones oscuras */
+  --dark2:      #111118;   /* fondo secciones oscuras alternativas */
+  --light:      #f5f5f7;   /* fondo secciones claras */
+  --light2:     #ffffff;   /* fondo secciones claras alternativas */
+
+  /* Acento */
+  --blue:       #1a8cff;   /* color de acento principal */
+  --blue-dark:  #0f5faa;   /* hover del acento */
+
+  /* Texto */
+  --text-dark:  #f5f5f7;   /* texto sobre fondos oscuros */
+  --text-muted: #a1a1aa;   /* texto secundario sobre fondos oscuros */
+  --text-light: #1d1d1f;   /* texto sobre fondos claros */
+  --text-light2:#6e6e73;   /* texto secundario sobre fondos claros */
+
+  /* Bordes */
+  --border:     rgba(255, 255, 255, 0.08); /* bordes sobre oscuro */
+
+  /* Tipografía */
+  --font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Layout */
+  --max-width:  1200px;    /* ancho máximo del contenido centrado */
+  --navbar-h:   72px;      /* altura de la navbar fija */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+html {
+  /* Compensa la navbar fija al saltar a anclas (#servicios, #contacto...) */
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--navbar-h);
+}
+
+body {
+  font-family: var(--font);
+  background: var(--dark);
+  color: var(--text-dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ---------- Utilidad de contenedor centrado ---------- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Animaciones de scroll (Intersection Observer) ----------
+   La clase .reveal arranca oculta y desplazada; al añadir .visible
+   (lo hace el hook useReveal) entra con fade + slide hacia arriba.
+   Los modificadores .d1–.d4 escalonan la entrada de elementos hermanos. */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal.d1 { transition-delay: 0.12s; }
+.reveal.d2 { transition-delay: 0.24s; }
+.reveal.d3 { transition-delay: 0.36s; }
+.reveal.d4 { transition-delay: 0.48s; }
+
+/* Respeta usuarios que prefieren menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

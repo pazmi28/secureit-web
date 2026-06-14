@@ -1,0 +1,89 @@
+/* ============================================================
+   Nosotros — sección clara (--light2), 4 stats + sectores.
+   ============================================================ */
+
+.nosotros {
+  min-height: 60vh;
+  background: var(--light2);
+  display: flex;
+  align-items: center;
+  padding: 100px 0;
+}
+
+.nosotros-eyebrow {
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--blue);
+  margin-bottom: 14px;
+}
+
+.nosotros-titulo {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  letter-spacing: -0.02em;
+  color: var(--text-light);
+  margin-bottom: 18px;
+  max-width: 680px;
+}
+
+.nosotros-subtitulo {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: var(--text-light2);
+  max-width: 600px;
+  margin-bottom: 56px;
+}
+
+/* ---------- 4 stats grandes ---------- */
+.nosotros-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+.nosotros-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.nosotros-stat__num {
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--blue);
+  line-height: 1;
+}
+
+.nosotros-stat__label {
+  font-size: 0.95rem;
+  color: var(--text-light2);
+  margin-top: 10px;
+}
+
+/* ---------- Fila de sectores (pills) ---------- */
+.nosotros-sectores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.nosotros-pill {
+  font-size: 0.9rem;
+  color: var(--text-light2);
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: var(--light);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .nosotros {
+    padding: 80px 0;
+  }
+  /* 2×2 en mobile */
+  .nosotros-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+}

@@ -1,0 +1,112 @@
+/* ============================================================
+   Navbar — fija, fondo adaptativo (transparente / dark / light)
+   ============================================================ */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--navbar-h);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  /* Estado inicial: transparente sobre el hero. La transición suaviza
+     el cambio de fondo/borde al pasar a .scrolled-dark / .scrolled-light. */
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s ease, border-color 0.3s ease,
+              backdrop-filter 0.3s ease;
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* ---------- Variante oscura (sobre secciones --dark / --dark2) ----------
+   El truco del navbar: fondo semitransparente + blur para efecto "glass". */
+.navbar.scrolled-dark {
+  background: rgba(10, 10, 15, 0.82);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-bottom-color: var(--border);
+}
+
+/* ---------- Variante clara (sobre secciones --light / --light2) ---------- */
+.navbar.scrolled-light {
+  background: rgba(245, 245, 247, 0.85);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- Logo ---------- */
+.navbar-logo {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-dark);
+  transition: color 0.3s ease;
+}
+
+.navbar-logo span {
+  color: var(--blue); /* "IT" en azul de acento */
+}
+
+/* En variante clara el texto del logo se oscurece para contraste. */
+.navbar.scrolled-light .navbar-logo {
+  color: var(--text-light);
+}
+
+/* ---------- Links de navegación (centro) ---------- */
+.navbar-links {
+  display: flex;
+  gap: 36px;
+}
+
+.navbar-links a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+
+.navbar-links a:hover {
+  color: var(--text-dark);
+}
+
+/* En variante clara los links cambian a paleta clara. */
+.navbar.scrolled-light .navbar-links a {
+  color: var(--text-light2);
+}
+
+.navbar.scrolled-light .navbar-links a:hover {
+  color: var(--text-light);
+}
+
+/* ---------- Botón CTA (derecha) ---------- */
+.navbar-cta {
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.navbar-cta:hover {
+  background: var(--blue-dark);
+  transform: translateY(-1px);
+}
+
+/* ---------- Responsive: en mobile solo logo + CTA ---------- */
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none;
+  }
+}

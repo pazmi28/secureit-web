@@ -1,0 +1,76 @@
+/* ============================================================
+   Footer — fondo --dark con borde superior sutil.
+   ============================================================ */
+
+.footer {
+  background: var(--dark);
+  border-top: 1px solid var(--border);
+  padding: 48px 0;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+/* ---------- Marca + copyright (izquierda) ---------- */
+.footer-logo {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-dark);
+}
+
+.footer-logo span {
+  color: var(--blue); /* "IT" en azul de acento */
+}
+
+.footer-copy {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* ---------- Links (derecha) ---------- */
+.footer-links {
+  display: flex;
+  gap: 48px;
+}
+
+.footer-nav,
+.footer-legal {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-links a {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--blue);
+}
+
+/* ---------- Responsive: apilado y centrado en mobile ---------- */
+@media (max-width: 768px) {
+  .footer-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 36px;
+  }
+
+  .footer-links {
+    gap: 40px;
+  }
+
+  .footer-nav,
+  .footer-legal {
+    align-items: center;
+  }
+}

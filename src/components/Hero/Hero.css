@@ -1,0 +1,167 @@
+/* ============================================================
+   Hero — 100vh, fondo oscuro con grid decorativo + glow radial
+   ============================================================ */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: var(--dark);
+  overflow: hidden; /* recorta el glow que sobresale */
+  padding: var(--navbar-h) 0 60px; /* deja hueco bajo la navbar fija */
+}
+
+/* ---------- Grid decorativo de líneas ----------
+   Dos gradientes repetidos (verticales + horizontales) dibujan la
+   rejilla. Una máscara radial la desvanece hacia los bordes. */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 80%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 80%);
+  pointer-events: none;
+}
+
+/* ---------- Glow radial central azul ----------
+   Halo difuso detrás del contenido para dar profundidad. */
+.hero-glow {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  width: 800px;
+  height: 800px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(26, 140, 255, 0.18) 0%,
+    rgba(26, 140, 255, 0.06) 35%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* ---------- Contenido ---------- */
+.hero-content {
+  position: relative; /* por encima de los fondos decorativos */
+  z-index: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-eyebrow {
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--blue);
+  margin-bottom: 20px;
+}
+
+.hero-title {
+  font-size: clamp(2.6rem, 7vw, 5rem);
+  letter-spacing: -0.03em;
+  color: var(--text-dark);
+  margin-bottom: 24px;
+}
+
+.hero-title span {
+  color: var(--blue); /* "blindada." en azul de acento */
+}
+
+.hero-subtitle {
+  max-width: 620px;
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  color: var(--text-muted);
+  margin-bottom: 40px;
+}
+
+/* ---------- Botones ---------- */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 72px;
+}
+
+.hero-btn {
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.2s ease, transform 0.2s ease,
+              border-color 0.2s ease;
+}
+
+.hero-btn--fill {
+  background: var(--blue);
+  color: #fff;
+}
+
+.hero-btn--fill:hover {
+  background: var(--blue-dark);
+  transform: translateY(-2px);
+}
+
+.hero-btn--outline {
+  background: transparent;
+  color: var(--text-dark);
+  border: 1px solid var(--border);
+}
+
+.hero-btn--outline:hover {
+  border-color: var(--blue);
+  transform: translateY(-2px);
+}
+
+/* ---------- Banda de stats ---------- */
+.hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 56px;
+}
+
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-stat__num {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.1;
+}
+
+.hero-stat__label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    margin-bottom: 56px;
+  }
+
+  .hero-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-stats {
+    gap: 32px;
+  }
+}

@@ -1,0 +1,261 @@
+/* ============================================================
+   DetalleServicio — sección split (texto + visual), 100vh.
+   Tema controlado por [data-theme]; lado del visual por modificador.
+   ============================================================ */
+
+.detalle {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 100px 0;
+}
+
+/* Temas de fondo */
+.detalle[data-theme='dark'] {
+  background: var(--dark);
+}
+.detalle[data-theme='light'] {
+  background: var(--light);
+}
+
+/* ---------- Layout split ---------- */
+.detalle-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 64px;
+}
+
+/* Por defecto el visual va a la derecha (lado='derecha').
+   Para lado='izquierda' lo reordenamos al primer lugar. */
+.detalle--visual-izquierda .detalle__visual {
+  order: -1;
+}
+
+/* ---------- Texto ---------- */
+.detalle__label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--blue);
+  margin-bottom: 14px;
+}
+
+.detalle__titulo {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  letter-spacing: -0.02em;
+  margin-bottom: 18px;
+}
+
+.detalle__desc {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  margin-bottom: 28px;
+  max-width: 520px;
+}
+
+/* Colores de texto según tema */
+.detalle[data-theme='dark'] .detalle__titulo {
+  color: var(--text-dark);
+}
+.detalle[data-theme='dark'] .detalle__desc {
+  color: var(--text-muted);
+}
+.detalle[data-theme='light'] .detalle__titulo {
+  color: var(--text-light);
+}
+.detalle[data-theme='light'] .detalle__desc {
+  color: var(--text-light2);
+}
+
+/* ---------- Link CTA ---------- */
+.detalle__link {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--blue);
+  transition: color 0.2s ease;
+}
+.detalle__link:hover {
+  color: var(--blue-dark);
+}
+
+/* ---------- Contenedor del visual ---------- */
+.detalle__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+}
+
+/* ============================================================
+   Visual 1 — Escudo (Firewall)
+   ============================================================ */
+.visual-escudo {
+  width: 240px;
+  max-width: 80%;
+  filter: drop-shadow(0 0 40px rgba(26, 140, 255, 0.25));
+}
+.visual-escudo__cuerpo {
+  fill: rgba(26, 140, 255, 0.08);
+  stroke: var(--blue);
+  stroke-width: 2.5;
+}
+.visual-escudo__borde {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 1.5;
+}
+.visual-escudo__check {
+  stroke: var(--blue);
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ============================================================
+   Visual 2 — Anillos de pulso (Monitorización), CSS puro.
+   Tres anillos que se expanden y desvanecen en bucle escalonado.
+   ============================================================ */
+.visual-pulso {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.visual-pulso__ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  border: 2px solid var(--blue);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  animation: pulso 2.4s ease-out infinite;
+}
+/* Retardos escalonados entre los 3 anillos */
+.visual-pulso__ring:nth-child(2) {
+  animation-delay: 0.8s;
+}
+.visual-pulso__ring:nth-child(3) {
+  animation-delay: 1.6s;
+}
+
+.visual-pulso__core {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 24px rgba(26, 140, 255, 0.7);
+}
+
+@keyframes pulso {
+  0% {
+    transform: translate(-50%, -50%) scale(0.4);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3.6);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .visual-pulso__ring {
+    animation: none;
+    opacity: 0.3;
+  }
+}
+
+/* ============================================================
+   Visual 3 — Panel de estado (Auditorías)
+   ============================================================ */
+.visual-panel {
+  width: 100%;
+  max-width: 420px;
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.visual-panel__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+}
+.visual-panel__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+}
+.visual-panel__title {
+  margin-left: 10px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.visual-panel__list {
+  padding: 8px 0;
+}
+.visual-panel__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+}
+.visual-panel__row:not(:last-child) {
+  border-bottom: 1px solid var(--border);
+}
+.visual-panel__label {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
+
+/* Badges de estado */
+.visual-panel__badge {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+.visual-panel__badge.is-ok {
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.12);
+}
+.visual-panel__badge.is-revisar {
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.12);
+}
+.visual-panel__badge.is-critico {
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.12);
+}
+
+/* ============================================================
+   Responsive — apila texto sobre visual en mobile.
+   El visual va siempre debajo del texto (order normalizado).
+   ============================================================ */
+@media (max-width: 768px) {
+  .detalle {
+    padding: 80px 0;
+  }
+  .detalle-inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .detalle--visual-izquierda .detalle__visual {
+    order: 0; /* en mobile el visual vuelve debajo del texto */
+  }
+  .detalle__visual {
+    min-height: auto;
+  }
+}

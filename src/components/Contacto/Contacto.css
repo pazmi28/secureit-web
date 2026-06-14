@@ -1,0 +1,159 @@
+/* ============================================================
+   Contacto — formulario de captación. Fondo oscuro --dark.
+   ============================================================ */
+
+.contacto {
+  min-height: 100vh;
+  background: var(--dark);
+  display: flex;
+  align-items: center;
+  padding: 100px 0;
+}
+
+.contacto-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ---------- Cabecera ---------- */
+.contacto-head {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.contacto-eyebrow {
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--blue);
+  margin-bottom: 14px;
+}
+
+.contacto-titulo {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  letter-spacing: -0.02em;
+  color: var(--text-dark);
+  margin-bottom: 14px;
+}
+
+.contacto-subtitulo {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: var(--text-muted);
+}
+
+/* ---------- Formulario ---------- */
+.contacto-form {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Dos campos por fila en desktop */
+.contacto-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.contacto-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contacto-field label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.contacto-field input,
+.contacto-field select,
+.contacto-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  color: var(--text-dark);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.contacto-field textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.contacto-field input::placeholder,
+.contacto-field textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* Foco con acento azul */
+.contacto-field input:focus,
+.contacto-field select:focus,
+.contacto-field textarea:focus {
+  outline: none;
+  border-color: var(--blue);
+  background: rgba(26, 140, 255, 0.04);
+}
+
+/* El select hereda el color de texto claro también en su menú */
+.contacto-field select {
+  appearance: none;
+  cursor: pointer;
+}
+
+/* ---------- Botón submit ---------- */
+.contacto-submit {
+  margin-top: 4px;
+  padding: 14px 28px;
+  border-radius: 10px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.contacto-submit:hover {
+  background: var(--blue-dark);
+  transform: translateY(-2px);
+}
+
+/* ---------- Datos de contacto ---------- */
+.contacto-datos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 32px;
+  margin-top: 40px;
+}
+
+.contacto-dato {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+
+a.contacto-dato:hover {
+  color: var(--blue);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .contacto {
+    padding: 80px 0;
+  }
+  /* Un campo por fila en mobile */
+  .contacto-row {
+    grid-template-columns: 1fr;
+  }
+  .contacto-datos {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+}
