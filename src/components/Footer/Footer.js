@@ -43,8 +43,10 @@ export default function Footer() {
             ))}
           </nav>
           <nav className="footer-legal">
-            <a href="#">Política de privacidad</a>
-            <a href="#">Aviso legal</a>
+            {/* href temporal "/" hasta que existan las páginas legales.
+                Evita el error jsx-a11y/anchor-is-valid del build de Vercel. */}
+            <a href="/">Política de privacidad</a>
+            <a href="/">Aviso legal</a>
           </nav>
         </div>
       </div>
