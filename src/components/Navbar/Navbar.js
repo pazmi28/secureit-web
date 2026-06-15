@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import './Navbar.css';
 
+const LINKS = [
+  { label: 'Servicios', id: 'servicios' },
+  { label: 'Nosotros', id: 'nosotros' },
+  { label: 'Contacto', id: 'contacto' },
+];
+
 /**
  * Navbar fija con fondo adaptativo según la sección bajo la barra.
  *
@@ -11,10 +17,15 @@ import './Navbar.css';
  *
  * En cada scroll se mira qué sección cruza la línea de la navbar con
  * getBoundingClientRect() y se aplica la clase correspondiente.
+ *
+ * En mobile (<768px) los links se ocultan y aparece un menú hamburguesa
+ * que abre un panel fullscreen con los links + CTA.
  */
 export default function Navbar() {
   // '' = transparente | 'scrolled-dark' | 'scrolled-light'
   const [variant, setVariant] = useState('');
+  // Estado del menú hamburguesa (solo relevante en mobile).
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const NAV_H = 72; // alto de la navbar (coincide con --navbar-h)
@@ -52,15 +63,41 @@ export default function Navbar() {
     };
   }, []);
 
+  // Cierra el menú al pasar a desktop o al pulsar Escape.
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth > 768) setMenuOpen(false);
+    };
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') setMenuOpen(false);
+    };
+    window.addEventListener('resize', onResize);
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      window.removeEventListener('resize', onResize);
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, []);
+
+  // Bloquea el scroll del body mientras el panel está abierto.
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [menuOpen]);
+
   // Scroll suave a una sección por id (el CSS ya tiene scroll-padding-top).
+  // Cierra el menú antes de desplazarse.
   const scrollTo = (e, id) => {
     e.preventDefault();
+    setMenuOpen(false);
     const target = document.getElementById(id);
     if (target) target.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <nav className={`navbar ${variant}`}>
+    <nav className={`navbar ${variant} ${menuOpen ? 'menu-open' : ''}`}>
       <div className="navbar-inner container">
         <a
           href="#inicio"
@@ -70,27 +107,58 @@ export default function Navbar() {
           Secure<span>IT</span>
         </a>
 
+        {/* Links centrales — solo desktop */}
         <ul className="navbar-links">
-          <li>
-            <a href="#servicios" onClick={(e) => scrollTo(e, 'servicios')}>
-              Servicios
-            </a>
-          </li>
-          <li>
-            <a href="#nosotros" onClick={(e) => scrollTo(e, 'nosotros')}>
-              Nosotros
-            </a>
-          </li>
-          <li>
-            <a href="#contacto" onClick={(e) => scrollTo(e, 'contacto')}>
-              Contacto
-            </a>
-          </li>
+          {LINKS.map((l) => (
+            <li key={l.id}>
+              <a href={`#${l.id}`} onClick={(e) => scrollTo(e, l.id)}>
+                {l.label}
+              </a>
+            </li>
+          ))}
         </ul>
 
+        {/* CTA — solo desktop */}
         <a
           href="#contacto"
           className="navbar-cta"
+          onClick={(e) => scrollTo(e, 'contacto')}
+        >
+          Habla con nosotros
+        </a>
+
+        {/* Botón hamburguesa — solo mobile */}
+        <button
+          type="button"
+          className={`navbar-toggle ${menuOpen ? 'is-open' : ''}`}
+          aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+          aria-expanded={menuOpen}
+          aria-controls="navbar-menu"
+          onClick={() => setMenuOpen((v) => !v)}
+        >
+          <span className="navbar-toggle__line" />
+          <span className="navbar-toggle__line" />
+          <span className="navbar-toggle__line" />
+        </button>
+      </div>
+
+      {/* Panel fullscreen — solo mobile */}
+      <div
+        id="navbar-menu"
+        className={`navbar-menu ${menuOpen ? 'open' : ''}`}
+      >
+        <ul className="navbar-menu__links">
+          {LINKS.map((l) => (
+            <li key={l.id}>
+              <a href={`#${l.id}`} onClick={(e) => scrollTo(e, l.id)}>
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <a
+          href="#contacto"
+          className="navbar-menu__cta"
           onClick={(e) => scrollTo(e, 'contacto')}
         >
           Habla con nosotros

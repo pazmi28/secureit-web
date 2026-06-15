@@ -104,9 +104,134 @@
   transform: translateY(-1px);
 }
 
-/* ---------- Responsive: en mobile solo logo + CTA ---------- */
+/* ---------- Botón hamburguesa (solo mobile) ---------- */
+.navbar-toggle {
+  display: none; /* oculto en desktop; se muestra en el @media */
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  z-index: 1002; /* por encima del panel para poder cerrarlo */
+}
+
+.navbar-toggle__line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text-dark);
+  transition: transform 0.3s ease, opacity 0.2s ease, background 0.3s ease;
+}
+
+/* Sobre secciones claras las líneas se oscurecen (salvo menú abierto). */
+.navbar.scrolled-light:not(.menu-open) .navbar-toggle__line {
+  background: var(--text-light);
+}
+
+/* Estado abierto: las 3 líneas forman una X. */
+.navbar-toggle.is-open .navbar-toggle__line:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.navbar-toggle.is-open .navbar-toggle__line:nth-child(2) {
+  opacity: 0;
+}
+.navbar-toggle.is-open .navbar-toggle__line:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ---------- Panel fullscreen del menú (solo mobile) ----------
+   Mismo "glass" oscuro que .scrolled-dark. Oculto por defecto con
+   fade + slide desde arriba; visible al añadir .open. */
+.navbar-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 1001; /* sobre el contenido, bajo la barra (logo + toggle) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  padding: var(--navbar-h) 24px 24px;
+  background: rgba(10, 10, 15, 0.92);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  /* Oculto: transparente, ligeramente desplazado y no interactivo. */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-16px);
+  transition: opacity 0.35s ease, transform 0.35s ease,
+              visibility 0.35s ease;
+}
+
+.navbar-menu.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.navbar-menu__links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.navbar-menu__links a {
+  font-size: 1.6rem; /* ~26px, estilo Apple */
+  font-weight: 600;
+  color: var(--text-dark);
+  transition: color 0.2s ease;
+}
+
+.navbar-menu__links a:hover {
+  color: var(--blue);
+}
+
+.navbar-menu__cta {
+  margin-top: 8px;
+  padding: 14px 32px;
+  border-radius: 10px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.navbar-menu__cta:hover {
+  background: var(--blue-dark);
+}
+
+/* Con el menú abierto forzamos la barra a estilo oscuro para que el
+   logo y la X contrasten sobre el panel oscuro. */
+.navbar.menu-open .navbar-logo {
+  color: var(--text-dark);
+}
+
+/* ---------- Responsive: en mobile, hamburguesa + panel ---------- */
 @media (max-width: 768px) {
-  .navbar-links {
+  .navbar-links,
+  .navbar-cta {
+    display: none; /* links y CTA pasan al panel */
+  }
+
+  .navbar-toggle {
+    display: flex;
+  }
+}
+
+/* En desktop el panel nunca debe interferir aunque quede .open. */
+@media (min-width: 769px) {
+  .navbar-menu {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-menu {
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    transform: none;
   }
 }
