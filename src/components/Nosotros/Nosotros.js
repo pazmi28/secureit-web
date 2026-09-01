@@ -2,9 +2,9 @@ import './Nosotros.css';
 import useReveal from '../../hooks/useReveal';
 
 const STATS = [
-  { num: '50+', label: 'empresas protegidas' },
+  { num: '50+', label: 'clientes atendidos' },
   { num: '8+', label: 'años de experiencia' },
-  { num: '0', label: 'brechas en clientes con monitorización' },
+  { num: '98%', label: 'incidencias resueltas a la primera' },
   { num: '2h', label: 'tiempo máximo de respuesta' },
 ];
 
@@ -27,11 +27,12 @@ export default function Nosotros() {
       <div className="container">
         <p className="nosotros-eyebrow reveal">Quiénes somos</p>
         <h2 className="nosotros-titulo reveal d1">
-          Ciberseguridad de confianza, resultados que se miden
+          El soporte informático de confianza, resultados que se miden
         </h2>
         <p className="nosotros-subtitulo reveal d2">
-          Llevamos casi una década protegiendo a empresas de Zaragoza y todo
-          Aragón. Cifras que respaldan nuestra forma de trabajar.
+          Llevamos casi una década dando soporte informático y ciberseguridad
+          a empresas y particulares de Zaragoza y toda Aragón. Cifras que
+          respaldan nuestra forma de trabajar.
         </p>
 
         <div className="nosotros-stats reveal d3">

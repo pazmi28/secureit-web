@@ -24,17 +24,17 @@ export default function Hero() {
 
       <div className="hero-content container">
         <p className="hero-eyebrow reveal">
-          Ciberseguridad empresarial · Zaragoza
+          Soporte técnico y ciberseguridad · Zaragoza
         </p>
 
         <h1 className="hero-title reveal d1">
-          Tu empresa, <span>blindada.</span>
+          Pensamos en <span>bytes</span>, hablamos en soluciones.
         </h1>
 
         <p className="hero-subtitle reveal d2">
-          Protegemos la infraestructura de tu negocio con firewalls
-          enterprise, monitorización 24/7 y auditorías de seguridad.
-          Tranquilidad digital para que tú te ocupes de crecer.
+          Mantenimiento informático, soporte técnico y ciberseguridad para
+          pymes, autónomos y particulares de Zaragoza y Aragón. Desde una
+          avería puntual hasta la protección integral de tu negocio.
         </p>
 
         <div className="hero-actions reveal d3">
@@ -43,7 +43,7 @@ export default function Hero() {
             className="hero-btn hero-btn--fill"
             onClick={(e) => scrollTo(e, 'contacto')}
           >
-            Solicitar auditoría gratuita
+            Solicitar diagnóstico gratuito
           </a>
           <a
             href="#servicios"
@@ -57,15 +57,15 @@ export default function Hero() {
         <div className="hero-stats reveal d4">
           <div className="hero-stat">
             <span className="hero-stat__num">50+</span>
-            <span className="hero-stat__label">empresas protegidas</span>
+            <span className="hero-stat__label">clientes atendidos</span>
           </div>
           <div className="hero-stat">
             <span className="hero-stat__num">8+</span>
             <span className="hero-stat__label">años de experiencia</span>
           </div>
           <div className="hero-stat">
-            <span className="hero-stat__num">24/7</span>
-            <span className="hero-stat__label">monitorización activa</span>
+            <span className="hero-stat__num">24-48h</span>
+            <span className="hero-stat__label">tiempo medio de respuesta</span>
           </div>
         </div>
       </div>
