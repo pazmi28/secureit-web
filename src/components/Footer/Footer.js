@@ -27,10 +27,10 @@ export default function Footer() {
             className="footer-logo"
             onClick={(e) => scrollTo(e, 'inicio')}
           >
-            Secure<span>IT</span>
+            Byt<span>IA</span>
           </a>
           <p className="footer-copy">
-            © 2026 SecureIT · Ciberseguridad empresarial · Zaragoza
+            © 2026 BytIA · Soporte informático y ciberseguridad · Zaragoza
           </p>
         </div>
 

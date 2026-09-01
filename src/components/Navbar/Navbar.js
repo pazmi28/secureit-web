@@ -104,7 +104,7 @@ export default function Navbar() {
           className="navbar-logo"
           onClick={(e) => scrollTo(e, 'inicio')}
         >
-          Secure<span>IT</span>
+          Byt<span>IA</span>
         </a>
 
         {/* Links centrales — solo desktop */}

@@ -27,7 +27,7 @@ export default function Contacto() {
         <header className="contacto-head">
           <p className="contacto-eyebrow reveal">Contacto</p>
           <h2 className="contacto-titulo reveal d1">
-            Hablemos de tu seguridad
+            Cuéntanos qué necesitas
           </h2>
           <p className="contacto-subtitulo reveal d2">
             Primera consulta gratuita. Sin compromiso.
@@ -67,6 +67,9 @@ export default function Contacto() {
               <option value="" disabled>
                 Selecciona un servicio…
               </option>
+              <option value="mantenimiento">
+                Soporte técnico y mantenimiento
+              </option>
               <option value="firewall">Firewall Enterprise</option>
               <option value="monitorizacion">Monitorización 24/7</option>
               <option value="auditorias">Auditorías de Seguridad</option>
@@ -85,8 +88,8 @@ export default function Contacto() {
         </form>
 
         <div className="contacto-datos reveal d3">
-          <a href="mailto:hola@secureit.es" className="contacto-dato">
-            hola@secureit.es
+          <a href="mailto:hola@bytia.net" className="contacto-dato">
+            hola@bytia.net
           </a>
           <a href="tel:+34976000000" className="contacto-dato">
             +34 976 000 000

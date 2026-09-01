@@ -14,7 +14,8 @@ import Footer from './components/Footer/Footer';
 
 function App() {
   // Las secciones se ensamblan en el orden definido en CLAUDE.md:
-  // Navbar · Hero · Servicios · DetalleServicio ×3 · Nosotros · Contacto · Footer
+  // Navbar · Hero · Servicios (con tabs) · DetalleServicio ×3 · Nosotros ·
+  // Contacto · Footer
   return (
     <div className="App">
       <Navbar />
