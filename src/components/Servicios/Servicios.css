@@ -93,17 +93,22 @@
   align-items: flex-start;
   padding: 36px;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border);
-  /* Hover sutil: borde azul + fondo algo más claro + leve elevación. */
-  transition: border-color 0.25s ease, background 0.25s ease,
-              transform 0.25s ease;
+  /* Fondo claro a propósito, igual que las cards de Soporte & Mantenimiento
+     (.st-card): mismo lenguaje visual para los dos tabs de Servicios. */
+  background: var(--light2);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  /* Hover: solo borde azul + sombra de elevación — el fondo se queda blanco
+     siempre. Se usa box-shadow en vez de transform: translateY() a
+     propósito — un transform activo hace que Chrome desactive el suavizado
+     de texto (ClearType) de la card mientras se hace hover, y se nota mucho
+     en texto oscuro sobre fondo claro (se ve "apagado" justo al pasar el
+     ratón). */
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .servicio-card:hover {
   border-color: var(--blue);
-  background: rgba(26, 140, 255, 0.04);
-  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -20px rgba(26, 140, 255, 0.45);
 }
 
 .servicio-card__icono {
@@ -114,13 +119,13 @@
 
 .servicio-card__nombre {
   font-size: 1.35rem;
-  color: var(--text-dark);
+  color: var(--text-light);
   margin-bottom: 12px;
 }
 
 .servicio-card__desc {
   font-size: 1rem;
-  color: var(--text-muted);
+  color: var(--text-light2);
   margin-bottom: 24px;
   flex-grow: 1; /* empuja el botón al fondo para alinear cards de distinto alto */
 }
@@ -181,10 +186,18 @@
 
 /* ---------- Card (<details> nativo) ---------- */
 .st-card {
-  border-radius: 14px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
   background: var(--light2);
   overflow: hidden;
+  /* Mismo hover que .servicio-card (ver su comentario sobre por qué usa
+     box-shadow y no transform), para que ambos tabs se comporten igual. */
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.st-card:hover {
+  border-color: var(--blue);
+  box-shadow: 0 20px 40px -20px rgba(26, 140, 255, 0.45);
 }
 
 .st-card[open] {
