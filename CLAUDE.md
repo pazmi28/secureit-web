@@ -138,7 +138,7 @@ Cada `<SoporteTecnicoCard>` es un `<details>`/`<summary>` nativo (accesible, sin
 Al desplegarse muestra el detalle completo y dos botones de contacto directo:
 - WhatsApp → `https://wa.me/<numero>?text=...` con el nombre del servicio precargado
 - Email → `mailto:hola@bytia.net?subject=...&body=...`
-El número de WhatsApp → sustituir por número móvil real de WhatsApp Business antes de publicar.
+Número de WhatsApp Business real: +34 631 019 668.
 
 **Tab 2 — Ciberseguridad Empresarial** (grid 2×2 de cards)
 Cada `<ServicioCard>` recibe props: `icono`, `nombre`, `descripcion`, `servicioId`

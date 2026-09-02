@@ -1,6 +1,5 @@
-// TODO: sustituir por el número de WhatsApp Business real (móvil) cuando
-// exista; de momento reutiliza el teléfono placeholder de Contacto.
-const WHATSAPP_NUMERO = '34976000000';
+// Número de WhatsApp Business real.
+const WHATSAPP_NUMERO = '34631019668';
 const EMAIL_CONTACTO = 'hola@bytia.net';
 
 /**
