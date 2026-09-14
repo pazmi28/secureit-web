@@ -15,8 +15,9 @@ Web corporativa estática para una empresa de soporte técnico, mantenimiento in
 
 ### Logo
 - **Concepto:** Wordmark tipográfico — la letra "B" rediseñada con trazos de circuito PCB y 3 conectores cuadrados a la izquierda. "Byt" en blanco, "IA" en azul eléctrico.
-- **Estado:** Referencia generada (ChatGPT/DALL-E). Pendiente refinado final en Illustrator con tipografía Inter Bold real.
-- **Archivos:** pendiente — guardar en `/public/logo.svg` cuando esté listo el vector.
+- **Estado:** Integrado en el Navbar como raster (`public/logo-bytia.png`, referencia ChatGPT/DALL-E, fondo negro sólido). Pendiente refinado final en Illustrator con tipografía Inter Bold real y exportación a SVG.
+- **Archivos:** `public/logo-bytia.png` (actual, ~860KB, pendiente optimizar/comprimir). Sustituir por `/public/logo.svg` cuando esté listo el vector — ese día también se puede simplificar el CSS de `.navbar-logo` (ver nota abajo, ya no haría falta la chip de fondo).
+- **Nota de implementación:** el PNG trae fondo negro sólido (no transparente), así que en `Navbar.js`/`Navbar.css` se envuelve en una chip oscura (`.navbar-logo`, `background: var(--dark)`) que se funde con el navbar oscuro y actúa como pastilla de marca sobre el navbar claro. Al tener el vector final con fondo transparente, revisar si esa chip sigue haciendo falta.
 
 ### Paleta de colores
 ```css

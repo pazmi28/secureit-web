@@ -43,22 +43,33 @@
   border-bottom-color: rgba(0, 0, 0, 0.08);
 }
 
-/* ---------- Logo ---------- */
+/* ---------- Logo ----------
+   El PNG de referencia trae fondo negro sólido (pendiente vector final
+   en /public/logo.svg). Se envuelve en una "chip" oscura fija para que
+   ese fondo quede integrado tanto sobre el navbar oscuro (se funde)
+   como sobre el navbar claro (lee como una pastilla de marca a
+   propósito, no como un recorte suelto). */
 .navbar-logo {
-  font-size: 1.35rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--text-dark);
-  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: var(--dark);
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.navbar-logo span {
-  color: var(--blue); /* "IT" en azul de acento */
+.navbar-logo-img {
+  display: block;
+  height: 40px;
+  width: auto;
 }
 
-/* En variante clara el texto del logo se oscurece para contraste. */
+/* Sobre el navbar claro la chip necesita un borde/sombra sutil para no
+   quedar flotando sin contraste contra el fondo casi blanco. */
 .navbar.scrolled-light .navbar-logo {
-  color: var(--text-light);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 /* ---------- Links de navegación (centro) ---------- */
@@ -202,12 +213,6 @@
 
 .navbar-menu__cta:hover {
   background: var(--blue-dark);
-}
-
-/* Con el menú abierto forzamos la barra a estilo oscuro para que el
-   logo y la X contrasten sobre el panel oscuro. */
-.navbar.menu-open .navbar-logo {
-  color: var(--text-dark);
 }
 
 /* ---------- Responsive: en mobile, hamburguesa + panel ---------- */

@@ -46,4 +46,14 @@
 - **Pendiente:** ninguno de esta tarea.
 - **Nota para futuros roles:** ninguna.
 
+### Director
+- **Contexto:** El usuario pidió sustituir el logo genérico de texto del Navbar por el nuevo logo (`docs/logo_bytia.png`, referencia PNG con fondo negro sólido, aportada por el usuario), ajustando el tamaño.
+- **Tarea ejecutada directamente** (sin encadenar al subagente `desarrollo`, por tratarse de un cambio acotado a un solo componente): copiado el PNG a `public/logo-bytia.png`; `Navbar.js` ahora renderiza `<img src="/logo-bytia.png" alt="BytIA">` en vez del wordmark de texto; `Navbar.css` envuelve el logo en una chip oscura (`.navbar-logo`, `background: var(--dark)`, `border-radius: 8px`) con `border`/`box-shadow` sutil solo en variante `.scrolled-light` para que tenga contraste sobre fondos claros — el fondo negro del PNG se funde con la chip en las variantes oscura/transparente. Imagen a `height: 40px` dentro de la chip.
+- **Verificado visualmente** con `agent-browser` sobre el build de producción (`npm run build` + `serve`): navbar transparente sobre el hero, navbar oscuro (`.scrolled-dark`, sección Servicios) y navbar claro (`.scrolled-light`, sección Nosotros), más viewport mobile (390×844, con y sin menú hamburguesa abierto). En los tres estados y en mobile el tamaño y contraste de la chip se ven correctos.
+- **Build/lint:** OK — `npm run build` (CI=true) compila con "Compiled successfully.".
+- **Actualizado `CLAUDE.md`:** sección "Logo" — estado, ruta del archivo actual y nota de implementación sobre la chip (para revisar cuando llegue el vector SVG final).
+- **Pendiente:** (1) el PNG pesa ~860KB, sin comprimir — no hay herramientas de imagen (ImageMagick/PIL/sharp) disponibles en este entorno para optimizarlo ahora; recomendable comprimirlo o sustituirlo por el SVG final antes de dar por cerrada la marca. (2) Vector final en Illustrator sigue pendiente (ya estaba en el checklist de marca de `CLAUDE.md`); cuando llegue, revisar si la chip de fondo oscuro del Navbar sigue haciendo falta (el SVG debería traer fondo transparente).
+- **Nota para futuros roles:** ninguna (cambio de marca/UI, no hay roles de Diseño/Marketing activos todavía).
+- **Sin commitear:** cambios en working tree a la espera de confirmación del usuario.
+
 ---

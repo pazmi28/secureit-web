@@ -104,7 +104,11 @@ export default function Navbar() {
           className="navbar-logo"
           onClick={(e) => scrollTo(e, 'inicio')}
         >
-          Byt<span>IA</span>
+          <img
+            src="/logo-bytia.png"
+            alt="BytIA"
+            className="navbar-logo-img"
+          />
         </a>
 
         {/* Links centrales — solo desktop */}
