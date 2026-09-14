@@ -87,7 +87,6 @@ src/
 ├── App.css                    ← variables CSS globales + reset
 └── index.js
 ```
-> Nota: `components/SoporteTecnico/SoporteTecnico.css` quedó huérfano (sin importar desde ningún sitio) tras fusionar esa sección como tab dentro de `Servicios`. Se dejó sin borrar a propósito; pendiente decidir si se elimina.
 
 ## Diseño
 
@@ -204,17 +203,17 @@ REACT_APP_EMAILJS_PUBLIC_KEY=
 - [ ] Configurar email corporativo hola@bytia.net en cliente de correo
 
 ### Pendiente — Desarrollo
-- [ ] Limpiar App.js (eliminar boilerplate CRA)
-- [ ] Crear variables CSS globales en App.css
-- [ ] Crear hook useReveal.js
-- [ ] Componente Navbar con lógica de scroll
-- [ ] Componente Hero
-- [ ] Componente Servicios con tabs (Soporte & Mantenimiento · Ciberseguridad Empresarial) + ServicioCard/SoporteTecnicoCard
-- [ ] Componentes DetalleServicio × 3
-- [ ] Componente Nosotros
-- [ ] Componente Contacto con formulario (console.log)
-- [ ] Componente Footer
-- [ ] Ensamblar en App.js
+- [x] Limpiar App.js (eliminar boilerplate CRA)
+- [x] Crear variables CSS globales en App.css
+- [x] Crear hook useReveal.js
+- [x] Componente Navbar con lógica de scroll
+- [x] Componente Hero
+- [x] Componente Servicios con tabs (Soporte & Mantenimiento · Ciberseguridad Empresarial) + ServicioCard/SoporteTecnicoCard
+- [x] Componentes DetalleServicio × 3
+- [x] Componente Nosotros
+- [x] Componente Contacto con formulario (console.log)
+- [x] Componente Footer
+- [x] Ensamblar en App.js
 - [ ] Test responsive mobile
 - [ ] Deploy en Vercel
 
