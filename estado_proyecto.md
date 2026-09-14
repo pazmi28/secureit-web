@@ -1,13 +1,13 @@
 # Estado del proyecto — BytIA
 
 > Bitácora compartida entre roles. Fuente de verdad de qué se ha hecho y qué queda abierto entre ejecuciones.
-> Fase actual: pruebas de funcionamiento con 2 roles (Director, Desarrollo). Ver `docs/sistema-agentes-roles-secureit.md`.
+> Fase actual: pruebas de funcionamiento con 3 roles (Director, Desarrollo, Marketing — este último incorporado el 2026-09-15 en modo práctica). Ver `docs/sistema-agentes-roles-secureit.md`.
 
 ## Cómo se usa este fichero
 
 - Cada rol añade una entrada nueva al final del bloque del día correspondiente (no edites entradas de otros roles ni de días anteriores).
-- El Director lee este fichero al empezar cada ejecución y lo relee después de que Desarrollo termine.
-- Formato de entrada: qué se asignó/hizo, resultado, qué queda pendiente, y una nota si algo debería revisarlo un rol que todavía no existe (Diseño/Marketing/CEO).
+- El Director lee este fichero al empezar cada ejecución y lo relee después de que cada rol operativo termine.
+- Formato de entrada: qué se asignó/hizo, resultado, qué queda pendiente, y una nota si algo debería revisarlo un rol que todavía no existe (Diseño/CEO).
 
 ---
 
@@ -55,5 +55,22 @@
 - **Pendiente:** (1) el PNG pesa ~860KB, sin comprimir — no hay herramientas de imagen (ImageMagick/PIL/sharp) disponibles en este entorno para optimizarlo ahora; recomendable comprimirlo o sustituirlo por el SVG final antes de dar por cerrada la marca. (2) Vector final en Illustrator sigue pendiente (ya estaba en el checklist de marca de `CLAUDE.md`); cuando llegue, revisar si la chip de fondo oscuro del Navbar sigue haciendo falta (el SVG debería traer fondo transparente).
 - **Nota para futuros roles:** ninguna (cambio de marca/UI, no hay roles de Diseño/Marketing activos todavía).
 - **Sin commitear:** cambios en working tree a la espera de confirmación del usuario.
+
+### Director
+- **Contexto:** El usuario pidió incorporar el rol de Marketing para empezar a practicar cómo funcionaría el planning semanal de publicaciones de contenido, usando de forma explícita información de la web todavía no definitiva (servicios placeholder, stats/teléfono sin confirmar en `CLAUDE.md`).
+- **Acción tomada:** Creado `.claude/agents/marketing.md` (rol Marketing, incluye SEO) siguiendo el mismo patrón que Director/Desarrollo. Actualizado `.claude/agents/director.md` para reconocer 3 roles activos y añadir lógica de encadenado hacia Marketing. Actualizado `docs/sistema-agentes-roles-secureit.md` (fase actual y checklist) y la cabecera de este fichero.
+- **Tarea asignada:** generar un primer planning semanal de práctica en `docs/marketing/planning-semanal.md`, a partir de las secciones "Marca", "Servicios" y "Nosotros" de `CLAUDE.md`, marcando explícitamente qué datos son placeholder (stats, teléfono, servicios del grid aún por definir).
+- **Dispara a:** Marketing
+
+### Marketing
+- **Hecho:** Primera ejecución del rol Marketing (práctica). Leído `CLAUDE.md` (secciones "Marca", "Servicios — detalle" y "Nosotros") y este fichero para conocer el estado real del proyecto. Generado el primer planning semanal de práctica en `docs/marketing/planning-semanal.md`: 5 publicaciones (lunes a viernes), canal principal asumido LinkedIn (con Instagram como secundario para la publicación del miércoles), cubriendo: presentación de marca, servicio de Soporte & Mantenimiento (CTA a WhatsApp real +34 631 019 668), stats de "Nosotros", sectores atendidos, y adelanto del catálogo de Ciberseguridad Empresarial.
+- **Pendiente (a confirmar por el usuario antes de publicar contenido real):** (1) canal social definitivo (se asumió LinkedIn/Instagram sin decisión explícita); (2) stats de "Nosotros" (50+ clientes, 8+ años, 98% incidencias resueltas a la primera, 2h tiempo máximo de respuesta) — usadas tal cual pero marcadas como placeholder en `CLAUDE.md`, sin verificación externa; (3) teléfono de contacto (+34 976 000 000, placeholder explícito en `CLAUDE.md`) — no se ha usado en ninguna publicación, se dirigió el CTA a WhatsApp o al formulario web en su lugar; (4) catálogo definitivo del grid de Ciberseguridad Empresarial (Firewall Enterprise, Monitorización 24/7, Auditorías de Seguridad, Consultoría IT), marcado en el propio `CLAUDE.md` como placeholder pendiente de sustituir por los servicios reales.
+- **Nota para futuros roles:** Diseño (cuando exista) debería revisar si necesita piezas gráficas simples para acompañar estas publicaciones (tarjeta de stats, grid 2×2 de servicios, carrusel de sectores) — no se ha producido ningún gráfico en esta tarea, solo el copy y el formato sugerido. Nada que Desarrollo deba ajustar en la web a raíz de este planning (no se promociona ninguna función no implementada).
+
+### Director (cierre)
+- **Resultado revisado:** `docs/marketing/planning-semanal.md` generado correctamente — 5 publicaciones con aviso de contenido de práctica en cabecera, cada una con red social, copy, CTA, formato y fuente/nota de trazabilidad a `CLAUDE.md`. Los datos placeholder (stats, teléfono, catálogo enterprise, canal social) quedan marcados de forma explícita y no se usó el teléfono placeholder en ningún CTA. No se tocó código de `src/` ni el checklist de `CLAUDE.md`.
+- **Nota de proceso:** igual que ocurrió con `desarrollo` el 2026-09-14, el subagente `marketing` no apareció disponible por el tool Agent en esta misma sesión (se creó el fichero `.claude/agents/marketing.md` después de que la sesión ya estuviera iniciada). Se ejecutó con `general-purpose` pasando el prompt de rol completo como workaround. Pendiente de validar en un chat nuevo si `marketing` aparece ya en la lista de subagentes.
+- **Sin encadenar:** Diseño y CEO siguen sin existir — la nota de Marketing sobre piezas gráficas queda registrada para cuando Diseño exista, sin actuar en su nombre. No hace falta encadenar a Desarrollo (el planning no promociona nada no implementado).
+- **Queda abierto:** validar la disponibilidad de `marketing` como subagente en un chat nuevo; y antes de cualquier publicación real, que el usuario confirme canal social, stats verificadas, teléfono corporativo real y catálogo definitivo de servicios enterprise. Cambios sin commitear a la espera de confirmación del usuario.
 
 ---
