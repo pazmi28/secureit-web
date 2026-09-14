@@ -28,7 +28,7 @@ export default function Hero() {
         </p>
 
         <h1 className="hero-title reveal d1">
-          Pensamos en <span>bytes</span>, hablamos en soluciones. (prueba de roles)
+          Pensamos en <span>bytes</span>, hablamos en soluciones.
         </h1>
 
         <p className="hero-subtitle reveal d2">

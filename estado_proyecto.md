@@ -37,3 +37,13 @@
 - **Nota para futuros roles:** ninguna (cambio puramente de verificación, sin impacto visual/de contenido definitivo).
 
 ---
+
+## 2026-09-15
+
+### Desarrollo
+- **Hecho:** Revertida la prueba de verificación del flujo de roles. En `src/components/Hero/Hero.js` (línea 30-31) se quitó el sufijo " (prueba de roles)" del `<h1>`, dejando el titular tal como estaba originalmente ("Pensamos en `bytes`, hablamos en soluciones."). No se tocó nada más del fichero. Confirmado en producción (Vercel) que el flujo Director→Desarrollo funcionó correctamente en la tarea anterior.
+- **Build/lint:** OK — `npm run build` compila con "Compiled successfully.", sin warnings de ESLint.
+- **Pendiente:** ninguno de esta tarea.
+- **Nota para futuros roles:** ninguna.
+
+---
