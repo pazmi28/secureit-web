@@ -30,4 +30,10 @@
 - **Pendiente:** Test responsive mobile y Deploy en Vercel (fuera del alcance de este housekeeping).
 - **Nota para futuros roles:** ninguna
 
+### Desarrollo
+- **Hecho:** Prueba de verificación del flujo de roles Director→Desarrollo. Modificado el `<h1>` del Hero (`src/components/Hero/Hero.js`, línea 30-31): añadido " (prueba de roles)" al final del texto, después del punto, como texto plano dentro del mismo `<h1>`. El `<span>bytes</span>` se dejó intacto. No se tocó nada más de `Hero.js` ni de otros componentes.
+- **Build/lint:** OK — `npm run build` compila con "Compiled successfully.", sin warnings nuevos.
+- **Pendiente:** ninguno de esta tarea. El texto "(prueba de roles)" es temporal para la prueba del flujo; revertirlo cuando el Director lo indique.
+- **Nota para futuros roles:** ninguna (cambio puramente de verificación, sin impacto visual/de contenido definitivo).
+
 ---
