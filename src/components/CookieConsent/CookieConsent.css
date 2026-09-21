@@ -1,0 +1,107 @@
+/* ============================================================
+   CookieConsent — banner RGPD fijo en la parte inferior.
+   Aparece con una transición simple de aparición (fade + slide),
+   sin librerías de animación, respetando prefers-reduced-motion.
+   ============================================================ */
+
+.cookie-consent {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 24px;
+  background: rgba(10, 10, 15, 0.92);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border);
+  animation: cookie-consent-in 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes cookie-consent-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cookie-consent-texto {
+  flex: 1 1 420px;
+  max-width: 720px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.cookie-consent-botones {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.cookie-consent-btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+.cookie-consent-btn--rechazar {
+  background: transparent;
+  color: var(--text-dark);
+  border: 1px solid var(--border);
+}
+
+.cookie-consent-btn--rechazar:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.cookie-consent-btn--aceptar {
+  background: var(--blue);
+  color: #fff;
+}
+
+.cookie-consent-btn--aceptar:hover {
+  background: var(--blue-dark);
+  transform: translateY(-2px);
+}
+
+/* Respeta usuarios que prefieren menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .cookie-consent {
+    animation: none;
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .cookie-consent {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 18px 20px;
+    gap: 14px;
+  }
+
+  .cookie-consent-texto {
+    flex: none;
+    max-width: none;
+    font-size: 0.85rem;
+  }
+
+  .cookie-consent-botones {
+    justify-content: stretch;
+  }
+
+  .cookie-consent-btn {
+    flex: 1;
+  }
+}
