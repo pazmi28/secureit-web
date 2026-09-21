@@ -174,12 +174,19 @@ El select de servicio tiene id="servicio-select" para que los botones de las car
 Datos de contacto: hola@bytia.net · +34 976 000 000 · Zaragoza, España (placeholder teléfono)
 
 ## Variables de entorno
-No se necesitan en esta fase (sin Firebase, sin EmailJS aún).
 Cuando se integre EmailJS añadir:
 ```
 REACT_APP_EMAILJS_SERVICE_ID=
 REACT_APP_EMAILJS_TEMPLATE_ID=
 REACT_APP_EMAILJS_PUBLIC_KEY=
+```
+
+Medición de tráfico (GA4), configurar en Vercel (Settings → Environment Variables):
+```
+REACT_APP_GA_MEASUREMENT_ID=   # Measurement ID de la propiedad GA4 (formato G-XXXXXXXXXX).
+                                # Si está vacía, no se carga ningún script de analítica.
+                                # gtag.js solo se inyecta si además el usuario ha aceptado
+                                # el banner de cookies (ver src/components/CookieConsent).
 ```
 
 ## Estado actual

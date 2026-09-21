@@ -1,4 +1,5 @@
 import './App.css';
+import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
 import Servicios from './components/Servicios/Servicios';
@@ -11,6 +12,7 @@ import {
 import Nosotros from './components/Nosotros/Nosotros';
 import Contacto from './components/Contacto/Contacto';
 import Footer from './components/Footer/Footer';
+import CookieConsent from './components/CookieConsent/CookieConsent';
 
 function App() {
   // Las secciones se ensamblan en el orden definido en CLAUDE.md:
@@ -58,6 +60,11 @@ function App() {
       <Nosotros />
       <Contacto />
       <Footer />
+
+      {/* Banner de consentimiento de cookies (RGPD) + carga condicional de GA4 */}
+      <CookieConsent />
+      {/* Vercel Analytics — no usa cookies de tracking individual, no requiere consentimiento */}
+      <Analytics />
     </div>
   );
 }
