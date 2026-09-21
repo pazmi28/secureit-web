@@ -11,13 +11,14 @@ Definir una estructura de agentes/prompts por rol (a modo de "empresa simulada")
 
 ---
 
-## 🧪 Fase actual: pruebas de funcionamiento con 2 roles
+## 🧪 Fase actual: pruebas de funcionamiento con 3 roles
 
-Antes de construir los 5 roles completos, se arranca solo con **Director** y **Desarrollo** para validar que el mecanismo básico funciona (lectura de `estado_proyecto.md`, asignación de tarea, ejecución, escritura de resultado) antes de invertir en CEO, Marketing, Diseño o en automatización con GitHub Actions.
+Se arrancó solo con **Director** y **Desarrollo** para validar que el mecanismo básico funciona (lectura de `estado_proyecto.md`, asignación de tarea, ejecución, escritura de resultado). Con eso validado, se incorpora **Marketing** en modo práctica (2026-09-15) para empezar a probar el planning semanal de contenido, aunque la información de marca/servicios de `CLAUDE.md` todavía no sea definitiva — el objetivo en esta fase es ejercitar el mecanismo (leer contexto → producir planning → registrar en `estado_proyecto.md`), no publicar contenido real todavía.
 
-- Motivo: el checklist de desarrollo de `CLAUDE.md` todavía tiene casi todos los componentes por construir — con un único responsable, Marketing/Diseño/CEO no tienen aún nada real que revisar (sin tráfico, sin contenido definitivo, sin Analytics).
+- Motivo de incorporar Marketing ya: aunque el checklist de desarrollo de `CLAUDE.md` no está cerrado al 100%, ya hay suficiente contenido de marca/servicios (aunque provisional) para practicar el flujo de planning, y así detectar pronto problemas de mecanismo antes de que haya contenido real que perder.
+- CEO y Diseño siguen sin activarse — no hay aún tráfico/Analytics ni suficientes cambios visuales acumulados que justifiquen esos roles.
 - Alcance de esta fase: ejecución manual dentro de una sesión de Claude Code en VS Code. Sin GitHub Actions, sin headless, sin `CLAUDE_CODE_OAUTH_TOKEN` todavía.
-- Los apartados de CEO, Marketing, Diseño y automatización que siguen en este documento quedan como diseño de referencia para cuando se amplíe el sistema — no se activan en esta fase.
+- Los apartados de CEO, Diseño y automatización que siguen en este documento quedan como diseño de referencia para cuando se amplíe el sistema — no se activan en esta fase.
 
 ---
 
@@ -148,15 +149,17 @@ Motivo: todo lo definido aquí (subagentes, ficheros de configuración `.claude/
 
 ## 📋 Pendiente / próximos pasos
 
-### Fase de pruebas (2 roles)
+### Fase de pruebas (2 roles → 3 roles)
 - [x] Crear `.claude/agents/director.md` y `.claude/agents/desarrollo.md`
 - [x] Definir formato/estructura de `estado_proyecto.md`
 - [x] Escribir el prompt del Director con la lógica de encadenado reactivo (adaptada a 2 roles)
 - [x] Decidir arranque: solo ejecución manual, sin GitHub Actions todavía
-- [ ] Validar en la práctica: Director asigna tarea real a Desarrollo, Desarrollo la ejecuta y escribe en `estado_proyecto.md`, Director relee y cierra
+- [x] Validar en la práctica: Director asigna tarea real a Desarrollo, Desarrollo la ejecuta y escribe en `estado_proyecto.md`, Director relee y cierra
+- [x] Crear `.claude/agents/marketing.md` en modo práctica y actualizar el prompt del Director para reconocer el 3er rol (2026-09-15)
+- [ ] Validar en la práctica: Marketing genera un primer planning semanal en `docs/marketing/planning-semanal.md` y deja constancia en `estado_proyecto.md`
 
 ### Ampliación futura (no en el alcance actual)
-- [ ] Crear `.claude/agents/ceo.md`, `.claude/agents/marketing.md`, `.claude/agents/diseno.md` cuando haya contenido/tráfico real que justifiquen esos roles
+- [ ] Crear `.claude/agents/ceo.md` y `.claude/agents/diseno.md` cuando haya tráfico/Analytics y volumen de cambios visuales que los justifiquen
 - [ ] Si se automatiza: generar `CLAUDE_CODE_OAUTH_TOKEN` con `claude setup-token` y añadirlo como secret
 - [ ] Configurar workflow de GitHub Actions (`.github/workflows/agentes-diarios.yml`)
 - [ ] Configurar "Ignored Build Step" en Vercel para el fichero de estado
