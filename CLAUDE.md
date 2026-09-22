@@ -225,6 +225,9 @@ REACT_APP_GA_MEASUREMENT_ID=   # Measurement ID de la propiedad GA4 (formato G-X
 - [ ] Test responsive mobile
 - [ ] Deploy en Vercel
 
+### Mejoras futuras (Fase 2)
+- [ ] **Dashboard de analítica propio dentro de la web**, trayendo datos de GA4 vía su Data API (`analyticsdata.googleapis.com`) en vez de mirar directamente el panel de Google Analytics. Requiere backend (función serverless, ej. Vercel Functions en `api/`) porque las credenciales de la API nunca pueden vivir en el cliente/navegador, y requiere control de acceso (no debe ser público en la web corporativa) — encaja de forma natural con el "portal de clientes con autenticación" ya previsto como Fase 2 en la cabecera de este documento, reutilizando esa misma infraestructura de backend/login en vez de montarla solo para esto. Descartado por ahora (2026-09-22): con el volumen de tráfico actual, el propio dashboard de GA4 ya cubre la necesidad sin coste de mantenimiento.
+
 ## Instrucciones generales para Claude Code
 - Construir componente a componente, en el orden del checklist
 - Cada componente tiene su propio fichero CSS (no CSS global salvo variables)
