@@ -180,4 +180,14 @@
 - **Build:** no requiere rebuild adicional (cambio puramente CSS, ya validado en local con `npm start`); pendiente de que un `npm run build` final antes de commitear confirme que sigue compilando limpio.
 - **Nota para futuros roles:** ninguna adicional — el resto de la implementación de Desarrollo (Vercel Analytics, carga condicional de GA4, documentación) se verificó correcta sin cambios.
 
+### Director (cierre — dashboard de analítica en producción)
+- **Resultado revisado:** PR #2 mergeado a `main` y desplegado en Vercel. El usuario completó las 3 acciones manuales pendientes:
+  1. **Search Console:** verificación por DNS TXT completada (el registro `google-site-verification=...` tardó en propagar, confirmado con `nslookup` contra 8.8.8.8 y 1.1.1.1 antes de reintentar, y la segunda verificación en Search Console fue correcta).
+  2. **GA4:** propiedad creada (cuenta "BytIA", flujo web `https://bytia.net`), Measurement ID `G-TPMM01DW40`. Se avisó explícitamente al usuario de NO usar la opción "Instalar manualmente" de GA4 (pegar el `<script>` de `gtag.js` en el HTML) porque cargaría GA4 sin esperar el consentimiento de cookies (incumpliría RGPD) y duplicaría la lógica ya implementada en `CookieConsent.js`; solo hacía falta el Measurement ID.
+  3. **Vercel:** variable `REACT_APP_GA_MEASUREMENT_ID=G-TPMM01DW40` añadida en Settings → Environment Variables (entorno Production, tipo "Config" en vez de "Secret" porque el Measurement ID no es sensible — es público por diseño en cualquier web con GA4) y redeploy manual disparado (el guardado de la env var no dispara redeploy automático).
+- **Verificado en producción por el Director:** comparado el bundle JS servido en `https://bytia.net` antes y después del redeploy (`curl` + `grep` del hash `main.*.js`) — el bundle previo al redeploy no contenía el Measurement ID; el bundle posterior (`main.d176562e.js`, hash distinto, confirma que fue un build nuevo) sí lo contiene.
+- **Verificado por el usuario:** banner de cookies visible en `bytia.net` en producción; tras pulsar "Aceptar", GA4 → Informes → Tiempo real registró 1 usuario activo desde España en segundos. Circuito de medición (Search Console + Vercel Analytics + GA4 con consentimiento RGPD) confirmado funcionando end-to-end en producción.
+- **Sin encadenar:** no queda ninguna tarea de código abierta de esta línea de trabajo (dashboard de analítica). Marketing podría, cuando le convenga, empezar a usar Search Console para trabajar SEO local (Zaragoza), y GA4 para medir el rendimiento de la landing de pruebas (`public/landing-diagnostico-gratuito.html`) una vez arranque la campaña de pago.
+- **Queda abierto (no bloqueante):** no existe todavía una página de política de privacidad/cookies enlazada desde el banner de consentimiento — recomendable crearla antes de que haya volumen real de tráfico de campañas de pago, aunque no es estrictamente obligatorio para el uso actual de bajo volumen.
+
 ---
