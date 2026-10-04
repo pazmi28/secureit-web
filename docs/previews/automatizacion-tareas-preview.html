@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  ⚠️ MAQUETA DE PREVISUALIZACIÓN — NO ES PRODUCCIÓN ⚠️
+  ============================================================
+  Qué es: una prueba visual estática de cómo podría verse un
+  tercer tab "Automatización de Tareas" dentro de la sección
+  Servicios de la web real (src/components/Servicios/Servicios.js),
+  junto a los dos tabs ya existentes (Soporte & Mantenimiento ·
+  Ciberseguridad Empresarial).
+
+  Qué NO es:
+  - No es el componente React definitivo. No se ha tocado ningún
+    fichero de src/ ni de public/ para producir esto.
+  - No contiene datos de cliente reales. El segundo ejemplo de
+    automatización (tienda de impresión) es ILUSTRATIVO, calcado
+    del lenguaje aportado por Marketing, no una confirmación de
+    un caso real ya cerrado.
+  - No está enlazada desde ningún sitio de la web en producción.
+    Vive fuera de src/ y public/ a propósito (docs/previews/) para
+    que no se bundlee con el build de React ni se sirva por Vercel.
+
+  Contexto completo: estado_proyecto.md, entradas bajo la fecha
+  "## 2026-10-04" (Director → Marketing → Desarrollo).
+
+  Pendiente antes de construir el tab real en Servicios.js:
+  decisión del usuario/Director sobre si esta idea se aprueba tal
+  cual, se ajusta, o se descarta. Esta maqueta es solo para que el
+  usuario la valore visualmente.
+  ============================================================
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Preview — Automatización de Tareas · BytIA</title>
+<meta name="robots" content="noindex, nofollow" />
+
+<style>
+  /* ============================================================
+     Variables de marca BytIA — mismas custom properties que
+     src/App.css, declaradas aquí porque este fichero es una
+     maqueta HTML suelta, fuera del bundle de React.
+     ============================================================ */
+  :root {
+    --dark: #0a0a0f;
+    --dark2: #111118;
+    --light: #f5f5f7;
+    --light2: #ffffff;
+    --blue: #1a8cff;
+    --blue-dark: #0f5faa;
+    --text-dark: #f5f5f7;
+    --text-muted: #a1a1aa;
+    --text-light: #1d1d1f;
+    --text-light2: #6e6e73;
+    --border: rgba(255, 255, 255, 0.08);
+    --font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--dark);
+    color: var(--text-dark);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    font-family: var(--font);
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: inherit;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- Aviso de maqueta, visible en la propia página ---------- */
+  .preview-banner {
+    background: #7a1f1f;
+    color: #fff;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 10px 16px;
+  }
+
+  /* ============================================================
+     Sección Servicios — mismo patrón que
+     src/components/Servicios/Servicios.css (fondo --dark2,
+     cabecera, tabs, panel con fade).
+     ============================================================ */
+  .servicios-preview {
+    background: var(--dark2);
+    padding: 72px 0 100px;
+  }
+
+  .servicios-eyebrow {
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--blue);
+    margin-bottom: 14px;
+  }
+
+  .servicios-titulo {
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    letter-spacing: -0.02em;
+    color: var(--text-dark);
+    margin-bottom: 18px;
+    max-width: 680px;
+  }
+
+  .servicios-subtitulo {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: var(--text-muted);
+    max-width: 640px;
+    margin-bottom: 40px;
+  }
+
+  /* ---------- Tabs ---------- */
+  .servicios-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+
+  .servicios-tab {
+    padding: 12px 24px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .servicios-tab:hover {
+    color: var(--text-dark);
+  }
+
+  .servicios-tab.is-active {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+  }
+
+  /* Marca discreta sobre el tab nuevo, solo en esta maqueta, para que el
+     usuario identifique de inmediato qué se está proponiendo. */
+  .servicios-tab__nuevo {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    padding: 2px 8px;
+    margin-left: 8px;
+  }
+
+  /* ---------- Panel activo ---------- */
+  .servicios-panel {
+    animation: servicios-panel-fade 0.4s ease;
+  }
+
+  .servicios-panel[hidden] {
+    display: none;
+  }
+
+  @keyframes servicios-panel-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .servicios-panel {
+      animation: none;
+    }
+  }
+
+  /* ---------- Grid 2x2 (tab Ciberseguridad, simplificado) ---------- */
+  .servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .servicio-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 36px;
+    border-radius: 16px;
+    background: var(--light2);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .servicio-card__icono {
+    font-size: 2.2rem;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .servicio-card__nombre {
+    font-size: 1.25rem;
+    color: var(--text-light);
+    margin-bottom: 10px;
+  }
+
+  .servicio-card__desc {
+    font-size: 0.95rem;
+    color: var(--text-light2);
+  }
+
+  /* ---------- Nota de simplificación (tabs estáticos) ---------- */
+  .tab-nota {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 24px;
+    text-align: center;
+  }
+
+  /* ---------- Grid de cards <details> (Soporte y Automatización) ---------- */
+  .soporte-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .auto-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  /* Nota discreta de credibilidad, sin nombrar herramientas concretas. */
+  .auto-credibilidad {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin: -8px auto 32px;
+    max-width: 620px;
+  }
+
+  /* ---------- Card (<details> nativo) ---------- */
+  .st-card {
+    border-radius: 16px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    background: var(--light2);
+    overflow: hidden;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .st-card:hover {
+    border-color: var(--blue);
+    box-shadow: 0 20px 40px -20px rgba(26, 140, 255, 0.45);
+  }
+
+  .st-card[open] {
+    border-color: var(--blue);
+  }
+
+  .st-card__summary {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: start;
+    gap: 14px;
+    padding: 20px 22px;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .st-card__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .st-card__summary:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: -2px;
+    border-radius: 10px;
+  }
+
+  .st-card__icono,
+  .st-card__badge,
+  .st-card__chevron {
+    margin-top: 2px;
+  }
+
+  .st-card__icono {
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+
+  .st-card__cabecera {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .st-card__nombre {
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--text-light);
+  }
+
+  .st-card__resumen {
+    font-size: 0.88rem;
+    color: var(--text-light2);
+  }
+
+  .st-card__badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--blue);
+    white-space: nowrap;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(26, 140, 255, 0.08);
+  }
+
+  .st-card__badge--ilustrativo {
+    color: var(--text-light2);
+    background: rgba(0, 0, 0, 0.06);
+  }
+
+  .st-card__chevron {
+    color: var(--text-light2);
+    transition: transform 0.25s ease;
+  }
+
+  .st-card[open] .st-card__chevron {
+    transform: rotate(180deg);
+  }
+
+  .st-card__detalle {
+    padding: 0 22px 24px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    padding-top: 18px;
+  }
+
+  .st-card__detalle p {
+    font-size: 0.95rem;
+    color: var(--text-light2);
+    margin-bottom: 18px;
+  }
+
+  .st-card__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .st-card__btn {
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 11px 18px;
+    border-radius: 8px;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .st-card__btn--fill {
+    background: var(--blue);
+    color: #fff;
+  }
+
+  .st-card__btn--fill:hover {
+    background: var(--blue-dark);
+  }
+
+  .st-card__btn--ghost {
+    background: transparent;
+    color: var(--blue);
+    border: 1px solid var(--blue);
+  }
+
+  .st-card__btn--ghost:hover {
+    background: rgba(26, 140, 255, 0.08);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 768px) {
+    .servicios-preview {
+      padding: 56px 0 72px;
+    }
+
+    .servicios-tabs {
+      flex-direction: column;
+    }
+
+    .servicios-tab {
+      width: 100%;
+      text-align: center;
+    }
+
+    .servicios-grid,
+    .soporte-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .servicio-card {
+      padding: 28px;
+    }
+
+    .st-card__summary {
+      grid-template-columns: auto 1fr;
+      grid-template-areas:
+        'icono cabecera'
+        'badge badge'
+        'chevron chevron';
+      row-gap: 10px;
+    }
+
+    .st-card__icono { grid-area: icono; }
+    .st-card__cabecera { grid-area: cabecera; }
+    .st-card__badge { grid-area: badge; justify-self: start; }
+    .st-card__chevron { display: none; }
+  }
+</style>
+</head>
+<body>
+
+  <p class="preview-banner">
+    MAQUETA DE PREVISUALIZACIÓN — sin datos de cliente reales — pendiente de validación del usuario
+  </p>
+
+  <section class="servicios-preview">
+    <div class="container">
+      <p class="servicios-eyebrow">Qué hacemos</p>
+      <h2 class="servicios-titulo">
+        Servicios que mantienen tu negocio funcionando
+      </h2>
+      <p class="servicios-subtitulo">
+        Desde una reparación puntual hasta la ciberseguridad de toda tu
+        empresa — y ahora, también, las tareas que se repiten cada día.
+      </p>
+
+      <div class="servicios-tabs" role="tablist">
+        <button
+          type="button"
+          role="tab"
+          class="servicios-tab"
+          data-tab="soporte"
+          aria-selected="false"
+          onclick="activarTab('soporte')"
+        >
+          Soporte &amp; Mantenimiento
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="servicios-tab"
+          data-tab="ciberseguridad"
+          aria-selected="false"
+          onclick="activarTab('ciberseguridad')"
+        >
+          Ciberseguridad Empresarial
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="servicios-tab is-active"
+          data-tab="automatizacion"
+          aria-selected="true"
+          onclick="activarTab('automatizacion')"
+        >
+          Automatización de Tareas
+          <span class="servicios-tab__nuevo">Nuevo</span>
+        </button>
+      </div>
+
+      <!-- ===================================================
+           Panel 1 — Soporte & Mantenimiento (simplificado/estático
+           solo para que la maqueta se vea completa al cambiar de
+           tab; el catálogo real y completo vive en
+           src/components/Servicios/Servicios.js).
+           =================================================== -->
+      <div id="panel-soporte" role="tabpanel" class="servicios-panel" hidden>
+        <div class="soporte-grid">
+          <details class="st-card">
+            <summary class="st-card__summary">
+              <span class="st-card__icono" aria-hidden="true">💽</span>
+              <span class="st-card__cabecera">
+                <span class="st-card__nombre">Formateo e instalación de Windows</span>
+                <span class="st-card__resumen">Equipo limpio, rápido y con todos los drivers al día.</span>
+              </span>
+              <span class="st-card__badge">Desde 35€</span>
+              <span class="st-card__chevron" aria-hidden="true">▾</span>
+            </summary>
+            <div class="st-card__detalle">
+              <p>Ejemplo simplificado para esta maqueta. Ver el catálogo completo y real en la web.</p>
+            </div>
+          </details>
+          <details class="st-card">
+            <summary class="st-card__summary">
+              <span class="st-card__icono" aria-hidden="true">🦠</span>
+              <span class="st-card__cabecera">
+                <span class="st-card__nombre">Eliminación de virus y malware</span>
+                <span class="st-card__resumen">Tu equipo lento o con anuncios raros, limpio de nuevo.</span>
+              </span>
+              <span class="st-card__badge">Desde 30€</span>
+              <span class="st-card__chevron" aria-hidden="true">▾</span>
+            </summary>
+            <div class="st-card__detalle">
+              <p>Ejemplo simplificado para esta maqueta. Ver el catálogo completo y real en la web.</p>
+            </div>
+          </details>
+        </div>
+        <p class="tab-nota">
+          Tab simplificado solo para esta maqueta — el catálogo completo (6 servicios) vive en la web real.
+        </p>
+      </div>
+
+      <!-- ===================================================
+           Panel 2 — Ciberseguridad Empresarial (simplificado/estático,
+           mismas 4 cards del grid real pero sin interacción de
+           pre-rellenado de formulario, no aplica en una maqueta suelta).
+           =================================================== -->
+      <div id="panel-ciberseguridad" role="tabpanel" class="servicios-panel" hidden>
+        <div class="servicios-grid">
+          <article class="servicio-card">
+            <span class="servicio-card__icono" aria-hidden="true">🛡️</span>
+            <h3 class="servicio-card__nombre">Firewall Enterprise</h3>
+            <p class="servicio-card__desc">Perímetro blindado con firewalls de nueva generación y reglas a medida.</p>
+          </article>
+          <article class="servicio-card">
+            <span class="servicio-card__icono" aria-hidden="true">📡</span>
+            <h3 class="servicio-card__nombre">Monitorización 24/7</h3>
+            <p class="servicio-card__desc">Vigilancia continua con detección de amenazas en tiempo real.</p>
+          </article>
+          <article class="servicio-card">
+            <span class="servicio-card__icono" aria-hidden="true">🔍</span>
+            <h3 class="servicio-card__nombre">Auditorías de Seguridad</h3>
+            <p class="servicio-card__desc">Análisis de vulnerabilidades y test de intrusión.</p>
+          </article>
+          <article class="servicio-card">
+            <span class="servicio-card__icono" aria-hidden="true">💼</span>
+            <h3 class="servicio-card__nombre">Consultoría IT</h3>
+            <p class="servicio-card__desc">Acompañamiento estratégico en ciberseguridad y cumplimiento normativo.</p>
+          </article>
+        </div>
+        <p class="tab-nota">
+          Tab simplificado solo para esta maqueta — sin el pre-rellenado del formulario de contacto real.
+        </p>
+      </div>
+
+      <!-- ===================================================
+           Panel 3 — Automatización de Tareas (PROPUESTA NUEVA,
+           el único tab realmente "funcional" de esta maqueta).
+           Copy tal cual entregado por Marketing el 2026-10-04.
+           =================================================== -->
+      <div id="panel-automatizacion" role="tabpanel" class="servicios-panel">
+        <p class="auto-credibilidad">
+          Usamos herramientas de automatización profesional, alojadas de
+          forma segura — tú sigues trabajando con las mismas aplicaciones
+          de siempre.
+        </p>
+        <div class="auto-grid">
+
+          <details class="st-card" open>
+            <summary class="st-card__summary">
+              <span class="st-card__icono" aria-hidden="true">📧</span>
+              <span class="st-card__cabecera">
+                <span class="st-card__nombre">Pedidos por email, a tu sistema, solos</span>
+                <span class="st-card__resumen">
+                  Conectamos tu Gmail con tu sistema de pedidos para que cada
+                  pedido se registre solo, sin copiar y pegar nada.
+                </span>
+              </span>
+              <span class="st-card__badge">Ejemplo de automatización</span>
+              <span class="st-card__chevron" aria-hidden="true">▾</span>
+            </summary>
+            <div class="st-card__detalle">
+              <p>
+                Conectamos tu Gmail con tu sistema de pedidos para que cada
+                pedido que llega por correo se registre solo, sin copiar y
+                pegar nada. Sigues trabajando con el mismo Gmail de siempre;
+                nosotros nos encargamos de que hable con tu sistema.
+              </p>
+              <div class="st-card__acciones">
+                <a
+                  class="st-card__btn st-card__btn--fill"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://wa.me/34631019668?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Automatizaci%C3%B3n%20de%20Tareas%20de%20BytIA%20%E2%80%94%20caso%3A%20pedidos%20por%20email%20a%20mi%20sistema%20de%20pedidos."
+                >
+                  💬 Escribir por WhatsApp
+                </a>
+                <a
+                  class="st-card__btn st-card__btn--ghost"
+                  href="mailto:hola@bytia.net?subject=Consulta%3A%20Automatizaci%C3%B3n%20de%20Tareas&body=Hola%2C%20me%20interesa%20el%20servicio%20de%20Automatizaci%C3%B3n%20de%20Tareas%20de%20BytIA%20%E2%80%94%20caso%3A%20pedidos%20por%20email%20a%20mi%20sistema%20de%20pedidos."
+                >
+                  ✉️ Enviar email
+                </a>
+              </div>
+            </div>
+          </details>
+
+          <details class="st-card">
+            <summary class="st-card__summary">
+              <span class="st-card__icono" aria-hidden="true">🖨️</span>
+              <span class="st-card__cabecera">
+                <span class="st-card__nombre">De correo a panel de estado del pedido</span>
+                <span class="st-card__resumen">
+                  Cada pedido que llega se registra solo, y el cliente
+                  consulta si está en cola o listo para recoger.
+                </span>
+              </span>
+              <span class="st-card__badge st-card__badge--ilustrativo">Ejemplo ilustrativo</span>
+              <span class="st-card__chevron" aria-hidden="true">▾</span>
+            </summary>
+            <div class="st-card__detalle">
+              <p>
+                Por ejemplo, en una tienda que recibe pedidos de impresión
+                por correo: cada pedido que llega se registra
+                automáticamente en el sistema de la tienda, sin que nadie
+                tenga que copiarlo a mano, y el cliente puede consultar en un
+                panel sencillo si su pedido ya está en cola o listo para
+                recoger.
+                <em>(Ejemplo ilustrativo del tipo de caso que resolvemos, no
+                un cliente real confirmado todavía.)</em>
+              </p>
+              <div class="st-card__acciones">
+                <a
+                  class="st-card__btn st-card__btn--fill"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://wa.me/34631019668?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Automatizaci%C3%B3n%20de%20Tareas%20de%20BytIA%20%E2%80%94%20caso%3A%20pedidos%20de%20impresi%C3%B3n%20con%20panel%20de%20estado."
+                >
+                  💬 Escribir por WhatsApp
+                </a>
+                <a
+                  class="st-card__btn st-card__btn--ghost"
+                  href="mailto:hola@bytia.net?subject=Consulta%3A%20Automatizaci%C3%B3n%20de%20Tareas&body=Hola%2C%20me%20interesa%20el%20servicio%20de%20Automatizaci%C3%B3n%20de%20Tareas%20de%20BytIA%20%E2%80%94%20caso%3A%20pedidos%20de%20impresi%C3%B3n%20con%20panel%20de%20estado."
+                >
+                  ✉️ Enviar email
+                </a>
+              </div>
+            </div>
+          </details>
+
+          <details class="st-card">
+            <summary class="st-card__summary">
+              <span class="st-card__icono" aria-hidden="true">🔄</span>
+              <span class="st-card__cabecera">
+                <span class="st-card__nombre">Hojas de cálculo y CRM, siempre sincronizados</span>
+                <span class="st-card__resumen">
+                  Cada dato nuevo se actualiza solo entre tu hoja de cálculo
+                  y tu CRM, sin exportar ni importar nada a mano.
+                </span>
+              </span>
+              <span class="st-card__badge">Ejemplo de automatización</span>
+              <span class="st-card__chevron" aria-hidden="true">▾</span>
+            </summary>
+            <div class="st-card__detalle">
+              <p>
+                Sincronizamos tu hoja de cálculo con tu CRM (o con el sistema
+                que uses para gestionar clientes) para que los datos nuevos
+                se actualicen automáticamente en ambos lados. También
+                podemos avisar a tus clientes de forma automática cuando
+                cambie el estado de su pedido o solicitud, sin que nadie
+                tenga que escribirlo a mano.
+              </p>
+              <div class="st-card__acciones">
+                <a
+                  class="st-card__btn st-card__btn--fill"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://wa.me/34631019668?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Automatizaci%C3%B3n%20de%20Tareas%20de%20BytIA%20%E2%80%94%20caso%3A%20sincronizar%20hojas%20de%20c%C3%A1lculo%20con%20mi%20CRM."
+                >
+                  💬 Escribir por WhatsApp
+                </a>
+                <a
+                  class="st-card__btn st-card__btn--ghost"
+                  href="mailto:hola@bytia.net?subject=Consulta%3A%20Automatizaci%C3%B3n%20de%20Tareas&body=Hola%2C%20me%20interesa%20el%20servicio%20de%20Automatizaci%C3%B3n%20de%20Tareas%20de%20BytIA%20%E2%80%94%20caso%3A%20sincronizar%20hojas%20de%20c%C3%A1lculo%20con%20mi%20CRM."
+                >
+                  ✉️ Enviar email
+                </a>
+              </div>
+            </div>
+          </details>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    // JS vanilla mínimo, solo para alternar qué panel se muestra —
+    // mismo espíritu que el useState de tabs en Servicios.js, sin
+    // librerías. El panel "automatizacion" empieza activo por defecto.
+    function activarTab(tabId) {
+      var tabs = ['soporte', 'ciberseguridad', 'automatizacion'];
+      tabs.forEach(function (id) {
+        var boton = document.querySelector('[data-tab="' + id + '"]');
+        var panel = document.getElementById('panel-' + id);
+        var activo = id === tabId;
+        boton.classList.toggle('is-active', activo);
+        boton.setAttribute('aria-selected', activo ? 'true' : 'false');
+        if (activo) {
+          panel.removeAttribute('hidden');
+        } else {
+          panel.setAttribute('hidden', '');
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
