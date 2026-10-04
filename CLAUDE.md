@@ -66,9 +66,9 @@ src/
 │   │   ├── Hero.js
 │   │   └── Hero.css
 │   ├── Servicios/
-│   │   ├── Servicios.js          ← sección única con 2 tabs (Soporte & Mantenimiento · Ciberseguridad Empresarial)
+│   │   ├── Servicios.js          ← sección única con 3 tabs (Soporte & Mantenimiento · Ciberseguridad Empresarial · Automatización de Tareas)
 │   │   ├── ServicioCard.js       ← card del tab Ciberseguridad Empresarial (grid 2×2)
-│   │   ├── SoporteTecnicoCard.js ← card <details> del tab Soporte & Mantenimiento (CTA WhatsApp/email)
+│   │   ├── SoporteTecnicoCard.js ← card <details> del tab Soporte & Mantenimiento y del tab Automatización de Tareas (CTA WhatsApp/email)
 │   │   └── Servicios.css
 │   ├── DetalleServicio/
 │   │   ├── DetalleServicio.js ← sección split texto+visual
@@ -114,7 +114,7 @@ src/
 ### Estructura de secciones (orden fijo)
 1. `<Navbar />` — fija
 2. `<Hero />` — 100vh, fondo --dark
-3. `<Servicios />` — 100vh, fondo --dark2, id="servicios" — 2 tabs: Soporte & Mantenimiento (activo por defecto) · Ciberseguridad Empresarial
+3. `<Servicios />` — 100vh, fondo --dark2, id="servicios" — 3 tabs: Soporte & Mantenimiento (activo por defecto) · Ciberseguridad Empresarial · Automatización de Tareas
 4. `<DetalleServicio />` × 3 — 100vh c/u (Firewall dark · Monitorización light · Auditorías dark)
 5. `<Nosotros />` — ~60vh, fondo --light2, id="nosotros"
 6. `<Contacto />` — 100vh, fondo --dark, id="contacto"
@@ -130,8 +130,8 @@ src/
 - Banda de 3 stats: 50+ clientes atendidos · 8+ años de experiencia · 24-48h tiempo medio de respuesta
 - Grid decorativo de fondo + glow radial central
 
-### Servicios (sección con 2 tabs, id="servicios")
-Estado del tab activo controlado con `useState` (sin librerías). Tab activo por defecto: **Soporte & Mantenimiento**. Cada panel se monta/desmonta condicionalmente al cambiar de tab (no ambos a la vez), lo que dispara una animación de fade en CSS (`@keyframes`, respeta `prefers-reduced-motion`) sin necesitar JS de animación.
+### Servicios (sección con 3 tabs, id="servicios")
+Estado del tab activo controlado con `useState` (sin librerías). Tab activo por defecto: **Soporte & Mantenimiento**. Cada panel se monta/desmonta condicionalmente al cambiar de tab (uno a la vez), lo que dispara una animación de fade en CSS (`@keyframes`, respeta `prefers-reduced-motion`) sin necesitar JS de animación.
 
 **Tab 1 — Soporte & Mantenimiento** (catálogo de servicios sueltos, puerta de entrada de bajo compromiso)
 Cada `<SoporteTecnicoCard>` es un `<details>`/`<summary>` nativo (accesible, sin JS para abrir/cerrar) con props: `icono`, `nombre`, `resumen`, `detalle`, `incluye` (array), `precio`, `duracion`.
@@ -146,6 +146,14 @@ El botón "Consultar más info →" de cada card:
 - Scrollea suavemente a `#contacto`
 - Pre-rellena el `<select>` del formulario con el servicio correspondiente
 - Implementar con `document.getElementById('servicio-select').value = servicioId`
+
+**Tab 3 — Automatización de Tareas** (catálogo de ejemplos de automatización, cotizados a medida por caso)
+Reutiliza el mismo componente `<SoporteTecnicoCard>` del Tab 1 (mismo patrón `<details>`/`<summary>`, mismas props y misma clase de grid `soporte-grid`) en vez de un componente propio, porque el servicio funciona igual: catálogo de casos sueltos con CTA directo, sin paquete fijo. Diferencia respecto al Tab 1: `precio` es siempre `'Presupuesto a medida'` (no hay tarifa fija, cada automatización se cotiza según alcance del proyecto) y `duracion` es `'Según alcance del proyecto'`.
+Contenido actual — 3 ejemplos ilustrativos de tareas repetitivas que se automatizan conectando las herramientas que el cliente ya usa (copy sin jerga técnica — nunca mencionar "n8n", "API" ni "VPS" en el texto visible al cliente):
+1. **Automatización de pedidos por email** — cada pedido que llega por correo se registra solo en el sistema de pedidos del cliente.
+2. **Seguimiento de pedidos para tus clientes** — ejemplo explícitamente marcado como ilustrativo (no cliente real confirmado): tienda que recibe pedidos de impresión por correo, con registro automático y panel de consulta de estado para el cliente final.
+3. **Hojas de cálculo y CRM, siempre sincronizados** — sincronización automática entre hoja de cálculo y CRM, con avisos automáticos a clientes ante cambios de estado.
+Origen del contenido: posicionamiento y copy entregados por Marketing el 2026-10-04 (análisis de encaje, mensaje de venta, perfil de cliente y canal — ver `estado_proyecto.md`), maquetados primero como prueba visual HTML en `docs/previews/automatizacion-tareas-preview.html` antes de esta implementación real.
 
 **Servicios actuales (sustituir cuando se definan los reales):**
 - Firewall Enterprise
